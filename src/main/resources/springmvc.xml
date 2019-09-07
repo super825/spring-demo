@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--组件扫描 -->
+    <context:component-scan base-package="com.ada.springmvc"
+        use-default-filters="false">
+        <!--只扫描mvc的注解 -->
+        <context:include-filter type="annotation"
+            expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!--视图解析器 -->
+    <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/">
+        </property>
+        <property name="suffix" value=".jsp">
+        </property>
+    </bean>
+
+    <!--配置处理静态资源 -->
+    <mvc:default-servlet-handler />
+    <!--配置处理静态资源handler之后，必须配置以下标签，否则mvc相关的注解会失效 -->
+    <mvc:annotation-driven />
+
+</beans>
